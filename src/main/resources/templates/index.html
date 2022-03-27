@@ -20,12 +20,20 @@
     <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
 
-    <!--    CSS-->
+<!--        CSS-->
     <link rel="stylesheet" href="/css/index.css">
-
+<!--    <link rel="stylesheet" href="../static/css/index.css">-->
 </head>
 <body>
 <div class="header">
+    <div class="logout_btn">
+        <span>봄이 오지 않은  <span th:text="${username}"></span> 님</span>
+        <form method="post" action="/user/logout">
+            <button class="button is-dark">로그아웃</button>
+        </form>
+
+    </div>
+
 <!--    상단 배너-->
     <div class="title">
         <h1>Spring has not Come</h1>
