@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spring has not Come</title>
+
+    <meta property="og:title" content="Spring has not Come">
+    <meta property="og:description" content="봄은 오지 않는다...">
+    <meta property="og:image" content="/image/ogimage.jpg">
+
+    <!--Bulma import-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <!--    구글폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Kirang+Haerang&display=swap" rel="stylesheet">
+
+    <!--    favicon & gotag-->
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+    <!--    CSS-->
+    <link rel="stylesheet" href="/css/detail.css">
+
+</head>
+
+<body>
+<div class="header">
+    <!--    상단 배너-->
+    <div class="title">
+        <h1>Spring has not Come</h1>
+        <p>
+        <h2>I will freeze to death soon...</h2>
+        </p>
+        <h2>당신에게 봄이 오지 않은 이유를 서술하시오.(5점)</h2>
+    </div>
+</div>
+
+<div class="list" id="main_post_box">
+    <!--글 작성하러 가기 버튼-->
+    <div class="main-post">
+        <article class="message is-dark">
+            <div class="message-header">
+                <p>Title</p>
+                <button onclick="back_page()" class="delete" aria-label="delete"></button>
+            </div>
+            <div class="dateTime">
+                <article class="message is-dark">
+                    <div class="message-body">
+                        📝 글쓴이 <span class="time_text">⏳️ 2022 - 03 -31 HH-MM</span>
+                    </div>
+                </article>
+            </div>
+
+            <article class="message is-dark">
+                <div class="message-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+                    <!--        삭제버튼-->
+                    <div class="delete_btn" onclick="deleteOne('1')" id="1-delete">
+                        <button class="button is-black" >삭제하기</button>
+                    </div>
+                </div>
+
+            </article>
+        </article>
+    </div>
+</div>
+
+</body>
+
+</html>

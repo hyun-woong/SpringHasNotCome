@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spring has not Come</title>
+
+    <meta property="og:title" content="Spring has not Come">
+    <meta property="og:description" content="봄은 오지 않는다...">
+    <meta property="og:image" content="/image/ogimage.jpg">
+
+    <!--Bulma import-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <!--    구글폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Kirang+Haerang&display=swap" rel="stylesheet">
+
+    <!--    favicon & gotag-->
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+    <!--    CSS-->
+    <link rel="stylesheet" href="/css/index.css">
+
+</head>
+
+<body>
+<div class="header">
+    <!--    상단 배너-->
+    <div class="title">
+        <h1>Spring has not Come</h1>
+        <p>
+        <h2>I will freeze to death soon...</h2>
+        </p>
+        <h2>당신에게 봄이 오지 않은 이유를 서술하시오.(5점)</h2>
+    </div>
+</div>
+<div class="background-body">
+
+<div class="list">
+    <!--등록하기 버튼-->
+    <div class="posting-btn">
+        <button class="button is-dark" onclick="post_save()">등록하기</button>
+    </div>
+    <!--    input-box-->
+    <div class="contents-Box">
+        <!--    Title-Box-->
+        <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+                <input id="title_box" class="input" type="text" placeholder="Text input">
+            </div>
+        </div>
+        <!--    Username-Box-->
+        <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+                <input id="username_box" class="input is-success" type="text" placeholder="" value="">
+                <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+                <span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+            </div>
+        </div>
+        <!--Contents-->
+        <div class="contents-min_box">
+            <div class="field">
+                <label class="label">Contents</label>
+                <div class="control">
+                    <textarea id="contents_box" class="textarea" placeholder="Textarea" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
