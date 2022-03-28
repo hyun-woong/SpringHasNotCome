@@ -25,6 +25,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column()
+    private String passwordCheck;
+
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -32,10 +35,33 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
-    public User(String username, String password, String email, UserRoleEnum role) {
+    @Column(unique = true)
+    private Long kakaoId;
+
+//    public User(String username, String password, String email, String passwordCheck , UserRoleEnum role) {
+//        this.username = username;
+//        this.password = password;
+//        this.passwordCheck = passwordCheck;
+//        this.email = email;
+//        this.role = role;
+//    }
+
+    public User(String username, String password, String email, UserRoleEnum role, String passwordCheck) {
+        this.username = username;
+        this.password = password;
+        this.passwordCheck = passwordCheck;
+        this.email = email;
+        this.role = role;
+        this.kakaoId = null;
+    }
+
+    public User(String username, String password, String email, UserRoleEnum role, Long kakaoId) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.kakaoId = kakaoId;
+        this.passwordCheck = null;
     }
+
 }

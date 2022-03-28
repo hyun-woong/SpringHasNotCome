@@ -32,6 +32,11 @@ public class UserService {
 
 // 패스워드 암호화
         String password = passwordEncoder.encode(requestDto.getPassword());
+        String passwordCheck = passwordEncoder.encode(requestDto.getPasswordCheck());
+        if (password.equals(passwordCheck)) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
         String email = requestDto.getEmail();
 
 // 사용자 ROLE 확인
@@ -43,7 +48,8 @@ public class UserService {
             role = UserRoleEnum.ADMIN;
         }
 
-        User user = new User(username, password, email, role);
+        User user = new User(username, password, email, role, passwordCheck);
         userRepository.save(user);
     }
+
 }

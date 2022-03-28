@@ -18,7 +18,7 @@
             var box = document.getElementById("admin-token");
 
 // If the checkbox is checked, display the output text
-            if (checkBox.checked == true){
+            if (checkBox.checked == true) {
                 box.style.display = "block";
             } else {
                 box.style.display = "none";
@@ -29,23 +29,35 @@
 <body>
 <div id="login-form">
     <div id="login-title">Sign up Select Shop</div>
-
-    <form action="/user/signup" method="post">
+    <!--아이디-->
+    <form class="form" action="'#" th:action="@{/user/signup}" th:object="${requestDto}" method="post" novalidate=""
+          style="width:370px">
         <div class="login-id-label">Username</div>
-        <input type="text" name="username" placeholder="Username" class="login-input-box">
+        <input th:field="*{username}" type="text" id="username" name="username" placeholder="Username"
+               class="login-input-box">
+        <small class="form-text text-danger" th:errors="*{username}"
+               th:if="${#fields.hasErrors('username')}">username</small>
 
+        <!--            비밀번호-->
         <div class="login-id-label">Password</div>
-        <input type="password" name="password" class="login-input-box">
+        <input th:field="*{password}" type="password" id="password" name="password" class="login-input-box">
+        <small class="form-text text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></small>
+        <!--            비밀번호 확인-->
+        <div class="login-id-label">Password check</div>
+        <input th:field="*{passwordCheck}" type="password" id="passwordCheck" name="passwordCheck"
+               class="login-input-box">
+        <small class="form-text text danger" th:errors="*{passwordCheck}"
+               th:if="${#fields.hasErrors('passwordCheck')}"></small>
 
         <div class="login-id-label">E-mail</div>
-        <input type="text" name="email" placeholder="E-mail" class="login-input-box">
-
+        <input th:field="*{email}" type="text" id="email" name="email" placeholder="E-mail" class="login-input-box">
+        <small class="form-text text debger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></small>
         <div>
             <input id="admin-check" type="checkbox" name="admin" onclick="onclickAdmin()" style="margin-top: 40px;">관리자
-            <input id="admin-token" type="password" name="adminToken" placeholder="관리자 암호" class="login-input-box" style="display:none">
+            <input id="admin-token" type="password" name="adminToken" placeholder="관리자 암호" class="login-input-box"
+                   style="display:none">
         </div>
-        <button id="login-id-submit">회원 가입</button>
+        <button id="login-id-submit" onclick="location.href ='/user/login'">회원 가입</button>
     </form>
-</div>
 </body>
 </html>
