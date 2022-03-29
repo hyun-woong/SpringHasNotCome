@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sparta.springhasnotcome.Dto.SignupRequestDto;
 import com.sparta.springhasnotcome.Models.User;
 import com.sparta.springhasnotcome.Repository.UserRepository;
+import com.sparta.springhasnotcome.Security.UserDetailsImpl;
 import com.sparta.springhasnotcome.Service.KakaoUserService;
 import com.sparta.springhasnotcome.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,16 +24,16 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
-    private final UserService userService;
-    private final UserRepository userRepository;
-    private final KakaoUserService kakaoUserService;
+  private final UserService userService;
+  private final KakaoUserService kakaoUserService;
+  private final UserRepository userRepository;
 
-    @Autowired
-    public UserController(UserService userService, UserRepository userRepository, KakaoUserService kakaoUserService) {
-        this.userService = userService;
-        this.userRepository = userRepository;
-        this.kakaoUserService = kakaoUserService;
-    }
+  @Autowired
+  public UserController(UserService userService, KakaoUserService kakaoUserService, UserRepository userRepository){
+      this.userService = userService;
+      this.kakaoUserService = kakaoUserService;
+      this.userRepository = userRepository;
+  }
 
     // 회원 로그인 페이지
     @GetMapping("/user/login")
@@ -39,58 +41,62 @@ public class UserController {
         return "login";
     }
 
-//    // 회원 가입 페이지
-//    @GetMapping("/user/signup")
-//    public String signup() {
-//        return "signup";
-//    }
-
+    // 회원 가입 페이지
     @GetMapping("/user/signup")
-    public String signup(Model model) {
+    public String signup(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        if(userDetails == null){
+            model.addAttribute("user","null");
+        }else{
+
+            model.addAttribute("user",userDetails.getUser().getUsername());
+        }
         model.addAttribute("requestDto", new SignupRequestDto());
         return "signup";
     }
 
 //    // 회원 가입 요청 처리
 //    @PostMapping("/user/signup")
-//    public String registerUser(SignupRequestDto requestDto) {
-//        userService.registerUser(requestDto);
-//        return "redirect:/user/login";
+//    public String registerUser(@Valid SignupRequestDto requestDto){
+//      userService.registerUser(requestDto);
+//      return "redirect:/user/login";
 //    }
 
+    //회원가입 요청처리
     @PostMapping("/user/signup")
     public String registerUser(Model model, @Valid @ModelAttribute("requestDto") SignupRequestDto requestDto, BindingResult bindingResult){
 
-        Optional<User> found1 = userRepository.findByUsername(requestDto.getUsername());
-        if (found1.isPresent()){
+        // 회원 ID 중복 확인
+        Optional<User> found1 = userRepository.findByUsername(requestDto.getUsername()); // Optional을 쓰면 null을 받을 수 있다.
+        if(found1.isPresent()){ // found가 null이 아니면 true를 출력한다.
             FieldError fieldError = new FieldError("requestDto", "username", "이미 존재하는 ID입니다.");
             bindingResult.addError(fieldError);
         }
 
-        if (!requestDto.getPassword().equals(requestDto.getPasswordCheck())){
-            FieldError fieldError = new FieldError("requestDto", "passwordCheck", "비밀번호가 일치하지 않습니다.");
+
+        if(!requestDto.getPassword().equals(requestDto.getPasswordCheck())){
+            FieldError fieldError = new FieldError("requestDto","passwordCheck","비밀번호가 일치하지 않습니다.");
             bindingResult.addError(fieldError);
         }
 
-        if (requestDto.getPassword().indexOf(requestDto.getUsername()) != -1){
-            FieldError fieldError = new FieldError("requestDto", "password", "비밀번호에 닉네임과 같은 값을 넣을 수 없습니다.");
+        if (requestDto.getPassword().contains(requestDto.getUsername())) {
+            FieldError fieldError = new FieldError("requestDto", "password", "비밀번호에 닉네임과 같은 값을 넣을수 없습니다.");
             bindingResult.addError(fieldError);
         }
 
-       Optional<User> found2 = userRepository.findByEmail(requestDto.getEmail());
-        if (found2.isPresent()){
+        // 회원 email 중복 확인
+        Optional<User> found2 = userRepository.findByEmail(requestDto.getEmail());
+        if(found2.isPresent()){ // found가 null이 아니면 true , true이면 같은이메일이 존재한다는 뜻
             FieldError fieldError = new FieldError("requestDto", "email", "이미 존재하는 email입니다.");
             bindingResult.addError(fieldError);
         }
 
-        if (bindingResult.hasErrors()){
-            model.addAttribute("user", "null");
-            return "sigup";
+        if(bindingResult.hasErrors()){
+            model.addAttribute("user","null");
+            return "signup";
         }
 
         userService.registerUser(requestDto);
         return "redirect:/user/login";
-
     }
 
     //kakao login
@@ -99,6 +105,4 @@ public class UserController {
         kakaoUserService.kakaoLogin(code);
         return "redirect:/";
     }
-
-
 }

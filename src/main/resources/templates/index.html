@@ -23,7 +23,8 @@
 <!--        CSS-->
     <link rel="stylesheet" href="/css/index.css">
 <!--    <link rel="stylesheet" href="../static/css/index.css">-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/js/index.js"></script>
 
 </head>
 <body>
@@ -49,8 +50,9 @@
     <div class="list">
         <!--글 작성하러 가기 버튼-->
         <div class="posting-btn">
-           <a th:href="@{'/post'}"><button class="button is-dark" onclick="writePost()">글쓰기</button></a>
+            <a th:href="@{'/post'}"><button class="button is-dark" onclick="writePost()">글쓰기</button></a>
         </div>
+
 
         <table class="table">
             <thead>
@@ -68,7 +70,11 @@
                 <tr>
                     <th>1</th>
                     <td>글쓴이1</td>
-                    <td  style="cursor: pointer" class="title_focus" onclick="showPost()"><a th:href="@{'/detail'}">췍췍췍 내 꿈은 체스왕 세계에서 제일 가는 체크라이커</a></td>
+
+                    <form class="detail_post" role="form" action="/home/{id}" method="get">
+                        <td  style="cursor: pointer" class="title_focus" onclick="showPost()">췍췍췍 내 꿈은 체스왕 세계에서 제일 가는 체크라이커</td>
+                    </form>
+
                     <td>2022. 03. 22</td>
                 </tr>
                 </tbody>

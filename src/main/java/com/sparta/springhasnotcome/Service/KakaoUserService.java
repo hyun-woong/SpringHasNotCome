@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.springhasnotcome.Dto.KakaoUserInfoDto;
-import com.sparta.springhasnotcome.Dto.SignupRequestDto;
 import com.sparta.springhasnotcome.Models.User;
-import com.sparta.springhasnotcome.Models.UserRoleEnum;
 import com.sparta.springhasnotcome.Repository.UserRepository;
 import com.sparta.springhasnotcome.Security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -70,10 +67,8 @@ public class KakaoUserService {
 
 // email: kakao email
             String email = kakaoUserInfo.getEmail();
-// role: 일반 사용자
-            UserRoleEnum role = UserRoleEnum.USER;
 
-            kakaoUser = new User(nickname, encodedPassword, email, role, kakaoId);
+            kakaoUser = new User(nickname, encodedPassword, email, kakaoId);
             userRepository.save(kakaoUser);
         }
         return kakaoUser;

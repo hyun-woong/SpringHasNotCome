@@ -1,17 +1,15 @@
 package com.sparta.springhasnotcome.Models;
 
-import com.sparta.springhasnotcome.Dto.BlogRequestDto;
+import com.sparta.springhasnotcome.Dto.PostRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Getter
-@Setter
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 public class Blog extends Timestamped {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,19 +25,25 @@ public class Blog extends Timestamped {
     @Column(nullable = false)
     private String contents;
 
-    @Column(nullable = false)
-    private String userId;
+    @Column
+    private Long userId;
 
-    public Blog(BlogRequestDto requestDto){
-        this.username = getUsername();
-        this.title = getTitle();
-        this.userId = getUserId();
-        this.contents = getContents();
+    public Blog(Long userId ,String username, String title, String contents){
+        this.username = username;
+        this.title = title;
+        this.contents = contents;
+        this.userId = userId;
     }
 
-    public void update(BlogRequestDto requestDto){
-        this.username = requestDto.getUsername();;
+
+    public Blog(PostRequestDto requestDto){
+        this.username = requestDto.getUsername();
+        this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
     }
 
+    public void update(PostRequestDto requestDto) {
+        this.username = requestDto.getUsername();
+        this.contents = requestDto.getContents();
+    }
 }

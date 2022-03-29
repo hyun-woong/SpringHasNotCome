@@ -15,7 +15,7 @@ function getMessages(id) {
     // 2. 메모 목록을 불러와서 HTML로 붙입니다.
     $.ajax({
         type: 'GET',
-        url: `/api/detail/${id}`,
+        url: `/detail/${id}`,
         success: function (response) {
             console.log(response);
             let blog = response;
@@ -63,14 +63,14 @@ function deleteOne(id) {
     // 1. DELETE /api/memos/{id} 에 요청해서 메모를 삭제합니다.
     $.ajax({
         type: "DELETE",
-        url: `/api/detail/${id}`,
+        url: `/home/${id}`,
         success: function (response) {
             alert('메시지 삭제에 성공하였습니다.');
-            window.location.href = '../../templates/index.html';
+            window.location.href = '/';
         }
     })
 }
 
 function back_page(){
-    window.location.href = '../../templates/index.html';
+    window.location.href = '/';
 }

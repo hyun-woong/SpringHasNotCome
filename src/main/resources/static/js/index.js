@@ -35,18 +35,18 @@ function addHTML(id, username, title, modifiedAt) {
                 <td style="cursor: pointer" class="title_focus" onclick="showPost(${id})">${username}</td>
                 <td>${modifiedAt}</td>
             </tr>
-        
+
        `
     // 2. #cards-box 에 HTML을 붙인다.
     $('#content-list').append(tempHtml);
 }
 
-
+//
 function writePost() {
     window.location.href = '/post.html';
 }
 
 function showPost(id) {
     console.log(id);
-    window.location.href = `/detail.html?id=${id}`
+    window.location.href = `./detail?id=${id}`
 }
