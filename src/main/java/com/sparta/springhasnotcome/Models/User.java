@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class User {
 
     // ID가 자동으로 생성 및 증가합니다.
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -34,6 +34,7 @@ public class User {
     @Column(unique = true)
     private Long kakaoId;
 
+
     public User(String username, String password, String email, String passwordCheck) {
         this.username = username;
         this.password = password;
@@ -47,7 +48,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.kakaoId = kakaoId;
-        this.passwordCheck = null;
+//        this.passwordCheck = null;
     }
 
 }

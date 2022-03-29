@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Blog extends Timestamped {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -24,16 +24,20 @@ public class Blog extends Timestamped {
 
     @Column(nullable = false)
     private String contents;
-
-    @Column
-    private Long userId;
-
-    public Blog(Long userId ,String username, String title, String contents){
-        this.username = username;
-        this.title = title;
-        this.contents = contents;
-        this.userId = userId;
-    }
+//
+//    @Column
+//    private Long userId;
+//
+//    @ManyToOne
+//    @JoinColumn(nullable=false)
+//    private User user;
+//
+//    public Blog(Long userId ,String username, String title, String contents){
+//        this.username = username;
+//        this.title = title;
+//        this.contents = contents;
+//        this.userId = userId;
+//    }
 
 
     public Blog(PostRequestDto requestDto){

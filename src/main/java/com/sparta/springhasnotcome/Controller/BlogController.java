@@ -3,8 +3,11 @@ package com.sparta.springhasnotcome.Controller;
 import com.sparta.springhasnotcome.Dto.PostRequestDto;
 import com.sparta.springhasnotcome.Models.Blog;
 import com.sparta.springhasnotcome.Repository.BlogRepository;
+import com.sparta.springhasnotcome.Security.UserDetailsImpl;
 import com.sparta.springhasnotcome.Service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,14 +25,14 @@ public class BlogController {
         return blogRepository.findAllByOrderByModifiedAtDesc();
     }
 
-    //게시글 상세페이지
-    @GetMapping("/detail/{id}")
-    public String getdetail(@PathVariable Long id){
-        Blog blog = blogRepository.findById(id).orElseThrow(
-                () -> new NullPointerException("게시글이 존재하지 않습니다.")
-        );
-        return "detail";
-    }
+//    //게시글 상세페이지
+//    @GetMapping("/api/detail")
+//    public String getdetail(@PathVariable Long id){
+//        Blog blog = blogRepository.findById(id).orElseThrow(
+//                () -> new NullPointerException("게시글이 존재하지 않습니다.")
+//        );
+//        return "detail";
+//    }
 
     //게시글 저장
     @PostMapping("/api/post")

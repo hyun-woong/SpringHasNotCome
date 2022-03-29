@@ -11,11 +11,11 @@ $(document).ready(function () {
 // 메모를 불러와서 보여줍니다.
 function getMessages(id) {
     // 1. 기존 메모 내용을 지웁니다.
-    $('#main_post_box').empty();
+    // $('#main_post_box').empty();
     // 2. 메모 목록을 불러와서 HTML로 붙입니다.
     $.ajax({
         type: 'GET',
-        url: `/detail/${id}`,
+        url: `/api/detail/${id}`,
         success: function (response) {
             console.log(response);
             let blog = response;
