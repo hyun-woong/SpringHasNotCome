@@ -22,7 +22,9 @@ public class BlogService {
         return blog.getId();
     }
 
-
-
-
+    //게시글 Post 요청 처리
+    //사용자 이름을 로그인 아이디로 변경된 값을 서비스에 리턴 후, 리포지토리에 저장
+    public Blog createpost(PostRequestDto requestDto) {
+        return blogRepository.save(new Blog(requestDto));
+    }
 }

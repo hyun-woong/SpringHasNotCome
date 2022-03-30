@@ -6,8 +6,10 @@ import com.sparta.springhasnotcome.Models.Blog;
 import com.sparta.springhasnotcome.Models.Comment;
 import com.sparta.springhasnotcome.Repository.BlogRepository;
 import com.sparta.springhasnotcome.Repository.CommentRepository;
+import com.sparta.springhasnotcome.Security.UserDetailsImpl;
 import com.sparta.springhasnotcome.Service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,12 +45,20 @@ public class BlogController {
 //        return "detail";
 //    }
 
+//    //게시글 저장
+//    @PostMapping("/api/post")
+//    public Blog createpost(@RequestBody PostRequestDto requestDto){
+//        Blog blog = new Blog(requestDto);
+//        blogRepository.save(blog);
+//        return blog;
+//    }
+
     //게시글 저장
+    //받아온 값의 username를 현재 로그인 된 사용자의 이름(아이디)로 바꿔줌
     @PostMapping("/api/post")
-    public Blog createpost(@RequestBody PostRequestDto requestDto){
-        Blog blog = new Blog(requestDto);
-        blogRepository.save(blog);
-        return blog;
+    public Blog createpost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        requestDto.setUsername(userDetails.getUsername());
+        return blogService.createpost(requestDto);
     }
 
     //게시글 삭제
