@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor //final이 있으면 생성자를 자동으로 넣어줌
 @Service
@@ -26,5 +27,16 @@ public class BlogService {
     //사용자 이름을 로그인 아이디로 변경된 값을 서비스에 리턴 후, 리포지토리에 저장
     public Blog createpost(PostRequestDto requestDto) {
         return blogRepository.save(new Blog(requestDto));
+    }
+
+    //id 값의 게시글을 삭제
+    public Long deletePost(Long id) {
+        blogRepository.deleteById(id);
+        return id;
+    }
+
+    public List<Blog> getblog() {
+        blogRepository.findAllByOrderByModifiedAtDesc();
+        return getblog();
     }
 }

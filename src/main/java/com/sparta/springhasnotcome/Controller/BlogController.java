@@ -25,7 +25,7 @@ public class BlogController {
     //메인 화면
     @GetMapping("/home")
     public List<Blog> getblog(){
-        return blogRepository.findAllByOrderByModifiedAtDesc();
+        return blogService.getblog();
     }
 
     //게시글 상세 페이지로 이동
@@ -45,7 +45,7 @@ public class BlogController {
 //        return "detail";
 //    }
 
-//    //게시글 저장
+//    //게시글 저장(유저디테일아이엠피엘 적용전)
 //    @PostMapping("/api/post")
 //    public Blog createpost(@RequestBody PostRequestDto requestDto){
 //        Blog blog = new Blog(requestDto);
@@ -64,8 +64,7 @@ public class BlogController {
     //게시글 삭제
     @DeleteMapping("/home/{id}")
     public Long deletePost(@PathVariable Long id){
-        blogRepository.deleteById(id);
-        return id;
+        return blogService.deletePost(id);
     }
 
     //게시글 수정
