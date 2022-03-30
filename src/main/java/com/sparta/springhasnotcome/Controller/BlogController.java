@@ -25,6 +25,14 @@ public class BlogController {
         return blogRepository.findAllByOrderByModifiedAtDesc();
     }
 
+    //게시글 상세 페이지로 이동
+    @GetMapping("/api/detail/{id}")
+    public Blog getdetail(@PathVariable Long id){
+        return blogRepository.findById(id).orElseThrow(
+                () -> new NullPointerException("게시글이 존재하지 않습니다.")
+        );
+    }
+
 //    //게시글 상세페이지
 //    @GetMapping("/api/detail")
 //    public String getdetail(@PathVariable Long id){

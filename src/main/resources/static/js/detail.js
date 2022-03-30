@@ -11,7 +11,7 @@ $(document).ready(function () {
 // 메모를 불러와서 보여줍니다.
 function getMessages(id) {
     // 1. 기존 메모 내용을 지웁니다.
-    // $('#main_post_box').empty();
+    $('#main_post_box').empty();
     // 2. 메모 목록을 불러와서 HTML로 붙입니다.
     $.ajax({
         type: 'GET',
@@ -43,7 +43,7 @@ function getMessages(id) {
         <div class="message-body">
           ${contents}
      <!--        삭제버튼-->
-         <div class="delete_btn" onclick="deleteOne('${id}')" id="${id}-delete">
+         <div class="delete_btn" onclick="deleteOne(${id})" id="${id}delete">
             <button class="button is-black" >삭제하기</button>
          </div>     
         </div>
