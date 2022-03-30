@@ -3,7 +3,6 @@ package com.sparta.springhasnotcome.Models;
 import com.sparta.springhasnotcome.Dto.PostRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -44,6 +43,7 @@ public class Blog extends Timestamped {
         this.username = requestDto.getUsername();
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
+        this.id = id;
     }
 
     public void update(PostRequestDto requestDto) {

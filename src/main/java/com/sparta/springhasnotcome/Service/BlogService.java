@@ -23,11 +23,11 @@ public class BlogService {
         return blog.getId();
     }
 
-    //게시글 Post 요청 처리
-    //사용자 이름을 로그인 아이디로 변경된 값을 서비스에 리턴 후, 리포지토리에 저장
-    public Blog createpost(PostRequestDto requestDto) {
-        return blogRepository.save(new Blog(requestDto));
-    }
+//    //게시글 Post 요청 처리
+//    //사용자 이름을 로그인 아이디로 변경된 값을 서비스에 리턴 후, 리포지토리에 저장
+//    public Blog createpost(PostRequestDto requestDto) {
+//        return blogRepository.save(new Blog(requestDto));
+//    }
 
     //id 값의 게시글을 삭제
     public Long deletePost(Long id) {
@@ -38,5 +38,10 @@ public class BlogService {
     //게시글 리스트 전체 GET
     public List<Blog> getblog() {
        return blogRepository.findAllByOrderByModifiedAtDesc();
+    }
+
+    @Transactional
+    public Blog savePost(PostRequestDto requestDto) {
+        return blogRepository.save(new Blog(requestDto));
     }
 }
