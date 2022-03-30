@@ -72,12 +72,7 @@ public class BlogController {
         commentRepository.save(comment);
         return comment;
     }
-//    @RequestMapping(value="api/detail/comment", method=RequestMethod.POST)
-//    public Comment createcomment(@RequestBody CommentRequestDto requestDto) {
-//            // post 방식만 가능
-//        Comment comment = new Comment(requestDto);
-//            commentRepository.save(comment);
-//            return comment;
-//        }
+
+
 
 }
