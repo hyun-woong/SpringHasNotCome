@@ -6,6 +6,7 @@ let id = searchParam('id');
 $(document).ready(function () {
     // HTML 문서를 로드할 때마다 실행합니다.
     getMessages(id);
+    getComment();
 })
 
 // 메모를 불러와서 보여줍니다.
@@ -64,6 +65,22 @@ function getMessages(id) {
                 </div>
             </div>
         </article>
+        <!--        댓글 목록-->
+        <div id="commentList">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong id="username">Kayli Eunice </strong>
+                            <br id="comment_text">
+                            Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id feugiat.
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
     
   </div>
        `;
@@ -106,12 +123,12 @@ function comment_save() {
     console.log(data);
         $.ajax({
             type: "POST",
-            url: "api/detail/comment",
+            url: "/api/detail/comment",
             contentType: "application/json", // JSON 형식으로 전달함을 알리기
             data: JSON.stringify(data),
             success: function (response) {
                 alert('게시글이 성공적으로 작성되었습니다.');
-                window.location.href = '/';
+                window.location.reload();
             }
         })
 }
@@ -122,13 +139,32 @@ function getComment() {
     // 2. 메모 목록을 불러와서 HTML로 붙입니다.
     $.ajax({
         type: 'GET',
-        url: `/api/detail/${id}`,
+        url: "/api/detail/comment",
         success: function (response) {
             console.log(response);
-            let blog = response;
-            let id = blog.id;
-            let title = blog.title;
-            let username = blog.username;
-            let contents = blog.contents;
-            let modifiedAt = blog.modifiedAt;
-            let tempHtml = `
+            for (let i =0; i < response.length; i++){
+                let comment = response[i];
+                // let username = comment.username;
+                let comment_text = comment.comment;
+
+                let tempHtml = `<article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong id="username">Kayli Eunice </strong>
+                            <br id="comment_text">
+                           ${comment_text}
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </article>  `
+                $('#commentList').append(tempHtml);
+            }
+
+            }
+        })
+
+
+
+        }

@@ -66,11 +66,15 @@ public class BlogController {
     }
 
 //    //댓글 작성
-    @PostMapping("api/detail/comment")
+    @PostMapping("/api/detail/comment")
     public Comment createcomment(@RequestBody CommentRequestDto requestDto){
         Comment comment = new Comment(requestDto);
         commentRepository.save(comment);
         return comment;
+    }
+    @GetMapping("/api/detail/comment")
+    public List<Comment> getcomment(){
+        return commentRepository.findAllByOrderByModifiedAtDesc();
     }
 
 
