@@ -1,6 +1,8 @@
 package com.sparta.springhasnotcome.Security;
 
 import com.sparta.springhasnotcome.Models.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

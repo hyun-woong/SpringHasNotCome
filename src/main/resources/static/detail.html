@@ -23,6 +23,7 @@
 
     <!--    CSS-->
     <link rel="stylesheet" href="/css/detail.css">
+    <link rel="stylesheet" href="../static/css/detail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/detail.js"></script>
 
@@ -72,9 +73,52 @@
                         <button class="button is-black" >삭제하기</button>
                     </div>
                 </div>
-
             </article>
         </article>
+
+<!--        댓글 달기-->
+        <article class="media">
+            <div class="media-content">
+                <div class="field">
+                    <p class="control">
+                        <textarea id="comment" class="textarea" placeholder="Add a comment..."></textarea>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button" onclick="comment_save()">댓글 달기</button>
+                    </p>
+                </div>
+            </div>
+        </article>
+
+<!--        댓글 목록-->
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>Kayli Eunice </strong>
+                        <br>
+                        Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id feugiat.
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </article>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>Kayli Eunice </strong>
+                        <br>
+                        Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id feugiat.
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+    </article>
     </div>
 </div>
 

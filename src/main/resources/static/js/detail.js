@@ -47,10 +47,24 @@ function getMessages(id) {
             <button class="button is-black" >삭제하기</button>
          </div>     
         </div>
-
-       
       </article>
     </article>
+    <!--        댓글 달기-->
+        <article class="media">
+            <div class="media-content">
+                <div class="field">
+                    <p class="control">
+                        <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button" onclick="comment_save()">댓글 달기</button>
+                    </p>
+                </div>
+            </div>
+        </article>
+    
   </div>
        `;
             $('#main_post_box').append(tempHtml);
@@ -73,4 +87,36 @@ function deleteOne(id) {
 
 function back_page(){
     window.location.href = '/';
+}
+
+// function isValidcomment(comment){
+//     if (comment == ''){
+//         alert('내용을 입력해 주세요.')
+//         return false;
+//     }return true;
+// }
+
+function comment_save() {
+    let comment = $('#comment').val();
+    let data = {'comment': comment};
+    // if (comment == ''){
+    //     alert('내용을 입력해 주세요.')
+    //     return;
+    // }else {
+
+        $.ajax({
+            type: "POST",
+            url: "api/detail/comment",
+            contentType: "application/json", // JSON 형식으로 전달함을 알리기
+            data: JSON.stringify(data),
+            success: function (response) {
+                alert('게시글이 성공적으로 작성되었습니다.');
+                window.location.href = '/';
+
+            }
+        })
+
+// }
+
+
 }

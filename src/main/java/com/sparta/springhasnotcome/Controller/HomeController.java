@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final BlogRepository blogRepository;
+//    private final BlogRepository blogRepository;
 
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {

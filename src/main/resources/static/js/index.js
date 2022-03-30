@@ -48,5 +48,5 @@ function writePost() {
 
 function showPost(id) {
     console.log(id);
-    window.location.href = `detail.html?id=${id}`;
+    window.location.href = `detail.html?id=${id}`
 }

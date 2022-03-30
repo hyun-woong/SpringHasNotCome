@@ -1,13 +1,13 @@
 package com.sparta.springhasnotcome.Controller;
 
+import com.sparta.springhasnotcome.Dto.CommentRequestDto;
 import com.sparta.springhasnotcome.Dto.PostRequestDto;
 import com.sparta.springhasnotcome.Models.Blog;
+import com.sparta.springhasnotcome.Models.Comment;
 import com.sparta.springhasnotcome.Repository.BlogRepository;
-import com.sparta.springhasnotcome.Security.UserDetailsImpl;
+import com.sparta.springhasnotcome.Repository.CommentRepository;
 import com.sparta.springhasnotcome.Service.BlogService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +18,7 @@ public class BlogController {
 
     private final BlogRepository blogRepository;
     private final BlogService blogService;
+    private final CommentRepository commentRepository;
 
     //메인 화면
     @GetMapping("/home")
@@ -64,5 +65,19 @@ public class BlogController {
         return id;
     }
 
+//    //댓글 작성
+    @PostMapping("api/detail/comment")
+    public Comment createcomment(@RequestBody CommentRequestDto requestDto){
+        Comment comment = new Comment(requestDto);
+        commentRepository.save(comment);
+        return comment;
+    }
+//    @RequestMapping(value="api/detail/comment", method=RequestMethod.POST)
+//    public Comment createcomment(@RequestBody CommentRequestDto requestDto) {
+//            // post 방식만 가능
+//        Comment comment = new Comment(requestDto);
+//            commentRepository.save(comment);
+//            return comment;
+//        }
 
 }
