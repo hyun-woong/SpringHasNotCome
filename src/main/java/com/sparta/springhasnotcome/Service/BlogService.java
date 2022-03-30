@@ -35,8 +35,8 @@ public class BlogService {
         return id;
     }
 
+    //게시글 리스트 전체 GET
     public List<Blog> getblog() {
-        blogRepository.findAllByOrderByModifiedAtDesc();
-        return getblog();
+       return blogRepository.findAllByOrderByModifiedAtDesc();
     }
 }
