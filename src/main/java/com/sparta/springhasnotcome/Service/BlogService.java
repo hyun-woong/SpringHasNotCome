@@ -39,4 +39,9 @@ public class BlogService {
     public List<Blog> getblog() {
        return blogRepository.findAllByOrderByModifiedAtDesc();
     }
+
+    @Transactional
+    public Blog savePost(PostRequestDto requestDto) {
+        return blogRepository.save(new Blog(requestDto));
+    }
 }

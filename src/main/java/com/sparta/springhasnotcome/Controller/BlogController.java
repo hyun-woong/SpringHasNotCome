@@ -55,11 +55,11 @@ public class BlogController {
 
     //게시글 저장
     //받아온 값의 username를 현재 로그인 된 사용자의 이름(아이디)로 바꿔줌
-    @PostMapping("/api/post")
-    public Blog createpost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        requestDto.setUsername(userDetails.getUsername());
-        return blogService.createpost(requestDto);
-    }
+//    @PostMapping("/api/post")
+//    public Blog createpost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+//        requestDto.setUsername(userDetails.getUsername());
+//        return blogService.createpost(requestDto);
+//    }
 
     //게시글 삭제
     @DeleteMapping("/home/{id}")
