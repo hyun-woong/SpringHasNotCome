@@ -11,6 +11,7 @@ import com.sparta.springhasnotcome.Service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,38 +29,27 @@ public class BlogController {
         return blogService.getblog();
     }
 
-    //게시글 상세 페이지로 이동
-    @GetMapping("/api/detail/{id}")
-    public Blog getdetail(@PathVariable Long id){
-        return blogRepository.findById(id).orElseThrow(
-                () -> new NullPointerException("게시글이 존재하지 않습니다.")
-        );
-    }
-
-//    //게시글 상세페이지
-//    @GetMapping("/api/detail")
-//    public String getdetail(@PathVariable Long id){
-//        Blog blog = blogRepository.findById(id).orElseThrow(
+//    //게시글 상세 페이지로 이동
+//    @GetMapping("/api/detail/{id}")
+//    public Blog getdetail(@PathVariable Long id){
+//        return blogRepository.findById(id).orElseThrow(
 //                () -> new NullPointerException("게시글이 존재하지 않습니다.")
 //        );
-//        return "detail";
 //    }
 
-//    //게시글 저장(유저디테일아이엠피엘 적용전)
-//    @PostMapping("/api/post")
-//    public Blog createpost(@RequestBody PostRequestDto requestDto){
-//        Blog blog = new Blog(requestDto);
-//        blogRepository.save(blog);
-//        return blog;
-//    }
+    @GetMapping("/blogs/detail")
+    public ModelAndView getOneBlogAndComments(@RequestParam Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return blogService.getOneBlogAndComments(id, userDetails);
+    }
 
-    //게시글 저장
-    //받아온 값의 username를 현재 로그인 된 사용자의 이름(아이디)로 바꿔줌
-//    @PostMapping("/api/post")
-//    public Blog createpost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-//        requestDto.setUsername(userDetails.getUsername());
-//        return blogService.createpost(requestDto);
-//    }
+
+//    게시글 저장
+//    받아온 값의 username를 현재 로그인 된 사용자의 이름(아이디)로 바꿔줌
+    @PostMapping("/api/post")
+    public Blog createpost(@RequestBody PostRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        requestDto.setUsername(userDetails.getUsername());
+        return blogService.createpost(requestDto);
+    }
 
     //게시글 삭제
     @DeleteMapping("/home/{id}")
@@ -74,17 +64,17 @@ public class BlogController {
         return id;
     }
 
-//    //댓글 작성
-    @PostMapping("/api/detail/comment")
-    public Comment createcomment(@RequestBody CommentRequestDto requestDto){
-        Comment comment = new Comment(requestDto);
-        commentRepository.save(comment);
-        return comment;
-    }
-    @GetMapping("/api/detail/comment")
-    public List<Comment> getcomment(){
-        return commentRepository.findAllByOrderByModifiedAtDesc();
-    }
+////    //댓글 작성
+//    @PostMapping("/api/detail/comment")
+//    public Comment createcomment(@RequestBody CommentRequestDto requestDto){
+//        Comment comment = new Comment(requestDto);
+//        commentRepository.save(comment);
+//        return comment;
+//    }
+//    @GetMapping("/api/detail/comment")
+//    public List<Comment> getcomment(){
+//        return commentRepository.findAllByOrderByModifiedAtDesc();
+//    }
 
 
 

@@ -32,7 +32,7 @@ function addHTML(id, username, title, modifiedAt) {
              <tr>
                 <th>${id}</th>
                 <td>${title}</td>
-                <td style="cursor: pointer" class="title_focus" onclick="showPost(${id})">${username}</td>
+               <td><a href="/blogs/detail?id=${id}">${username}</a></td>
                 <td>${modifiedAt}</td>
             </tr>
 
@@ -44,9 +44,4 @@ function addHTML(id, username, title, modifiedAt) {
 //
 function writePost() {
     window.location.href = '/post.html';
-}
-
-function showPost(id) {
-    console.log(id);
-    window.location.href = `detail.html?id=${id}`
 }

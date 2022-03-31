@@ -1,22 +1,17 @@
-function searchParam(key){
-    return new URLSearchParams(location.search).get(key);
-}
-let id = searchParam('id');
-
 $(document).ready(function () {
     // HTML 문서를 로드할 때마다 실행합니다.
-    getMessages(id);
-    getComment();
+    getMessages();
 })
 
 // 메모를 불러와서 보여줍니다.
-function getMessages(id) {
+function getMessages() {
     // 1. 기존 메모 내용을 지웁니다.
     $('#main_post_box').empty();
-    // 2. 메모 목록을 불러와서 HTML로 붙입니다.
+    let idx = location.href.split("id=")[1]; //localhost/detail.html?id=12
     $.ajax({
         type: 'GET',
-        url: `/api/detail/${id}`,
+        url: `/blogs/detail/${idx}`,
+        data: {},
         success: function (response) {
             console.log(response);
             let blog = response;
@@ -25,8 +20,18 @@ function getMessages(id) {
             let username = blog.username;
             let contents = blog.contents;
             let modifiedAt = blog.modifiedAt;
-            let tempHtml = `
-             <div class="main-post">
+            addHTML(id, title, username, contents, modifiedAt)
+        }
+    });
+}
+
+function addHTML(id, title, username, contents, modifiedAt){
+    let tempHtml = makeMessage(id, username, title, contents, modifiedAt);
+    $('#main_post_box').append(tempHtml);
+}
+
+function makeMessage(id, username, title, contents, modifiedAt){
+    return `<div class="main-post">
     <article class="message is-dark">
       <div class="message-header">
         <p>${title}</p>
@@ -50,12 +55,12 @@ function getMessages(id) {
         </div>
       </article>
     </article>
-    <!--        댓글 달기-->
+ <!--        댓글 달기-->
         <article class="media">
             <div class="media-content">
                 <div class="field">
                     <p class="control">
-                         <textarea id="comment" class="textarea" placeholder="Add a comment..."></textarea>
+                        <textarea id="comment" class="textarea" placeholder="Add a comment..."></textarea>
                     </p>
                 </div>
                 <div class="field">
@@ -65,6 +70,7 @@ function getMessages(id) {
                 </div>
             </div>
         </article>
+
         <!--        댓글 목록-->
         <div id="commentList">
             <article class="media">
@@ -73,22 +79,22 @@ function getMessages(id) {
                         <p>
                             <strong id="username">Kayli Eunice </strong>
                             <br id="comment_text">
-                            Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id feugiat.
+                            Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit
+                            amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in
+                            faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id
+                            feugiat.
                             <br>
                         </p>
                     </div>
                 </div>
             </article>
         </div>
-        
-    
-  </div>
-       `;
-            $('#main_post_box').append(tempHtml);
-        }
-    })
-//메인페이지로 돌아가기
+
+    </div>
+    </article>
+</div>`
 }
+
 
 function deleteOne(id) {
     // 1. DELETE /api/memos/{id} 에 요청해서 메모를 삭제합니다.

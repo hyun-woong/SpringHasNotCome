@@ -8,23 +8,34 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Getter
 @Entity
-@NoArgsConstructor
+@Setter
 public class Comment extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long commentId;
 
     @Column(nullable = false)
-    private String comment;
+    private String nickname;
 
-//    @ManyToOne//다대일 관계 매핑 정보, 연관관계 매핑시 다중성 어노테이션 필수
-//    @JoinColumn(nullable = false)//외래 키 매핑 시 사용
-//    private User username;
+    @Column(nullable = false)
+    private String contents;
 
-    public Comment(CommentRequestDto requestDto){
-        this.comment = requestDto.getComment();
+    @Column(nullable = false)
+    private Long blogId;
+
+    public Comment(CommentRequestDto requestDto, String nickname) {
+        this.contents = requestDto.getContents();
+        this.blogId = requestDto.getBlogId();
+        this.nickname = nickname;
+    }
+
+    public long update (CommentRequestDto requestDto){
+        this.contents = requestDto.getContents();
+        this.blogId = requestDto.getBlogId();
+        return commentId;
     }
 
 

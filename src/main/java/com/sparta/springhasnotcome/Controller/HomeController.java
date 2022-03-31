@@ -33,12 +33,12 @@ private final BlogService blogService;
         return "post";
     }
 
-    //게시글 저장
-    @PostMapping("/post")
-    public String write(PostRequestDto postRequestDto){
-        blogService.savePost(postRequestDto);
-        return "redirect:/";
-    }
+//    //게시글 저장
+//    @PostMapping("/post")
+//    public String write(PostRequestDto postRequestDto){
+//        blogService.savePost(postRequestDto);
+//        return "redirect:/";
+//    }
 
 //
 //    //게시글 상세 페이지로 이동
