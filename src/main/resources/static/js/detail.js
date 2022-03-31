@@ -1,7 +1,7 @@
-// $(document).ready(function () {
-//     // HTML 문서를 로드할 때마다 실행합니다.
-//     getMessages();
-// })
+$(document).ready(function () {
+    // HTML 문서를 로드할 때마다 실행합니다.
+    getComments();
+})
 //
 // // 메모를 불러와서 보여줍니다.
 // function getMessages() {
@@ -108,69 +108,87 @@
 //     })
 // }
 //
-// function back_page(){
-//     window.location.href = '/';
-// }
-//
-// // function isValidcomment(comment){
-// //     if (comment == ''){
-// //         alert('내용을 입력해 주세요.')
-// //         return false;
-// //     }return true;
-// // }
-//
-// function comment_save() {
-//     let comment = $('#comment').val();
-//     let data = {'comment': comment};
+function back_page() {
+    window.location.href = '/';
+}
+
+// function isValidcomment(comment){
 //     if (comment == ''){
 //         alert('내용을 입력해 주세요.')
-//         return;
-//     }else {
-//     console.log(data);
-//         $.ajax({
-//             type: "POST",
-//             url: "/api/detail/comment",
-//             contentType: "application/json", // JSON 형식으로 전달함을 알리기
-//             data: JSON.stringify(data),
-//             success: function (response) {
-//                 alert('게시글이 성공적으로 작성되었습니다.');
-//                 window.location.reload();
-//             }
-//         })
+//         return false;
+//     }return true;
 // }
-// }
-// function getComment() {
-//     // 1. 기존 메모 내용을 지웁니다.
-//     $('#commentList').empty();
-//     // 2. 메모 목록을 불러와서 HTML로 붙입니다.
-//     $.ajax({
-//         type: 'GET',
-//         url: "/api/detail/comment",
-//         success: function (response) {
-//             console.log(response);
-//             for (let i =0; i < response.length; i++){
-//                 let comment = response[i];
-//                 // let username = comment.username;
-//                 let comment_text = comment.comment;
-//
-//                 let tempHtml = `<article class="media">
-//                 <div class="media-content">
-//                     <div class="content">
-//                         <p>
-//                             <strong id="username">Kayli Eunice </strong>
-//                             <br id="comment_text">
-//                            ${comment_text}
-//                             <br>
-//                         </p>
-//                     </div>
-//                 </div>
-//             </article>  `
-//                 $('#commentList').append(tempHtml);
-//             }
-//
-//             }
-//         })
-//
-//
-//
-//         }
+
+function comment_save() {
+    // let user = [[${user}]];
+    // // 로그인 여부 검사시 필요
+
+    let comment = $('#comment').val();
+    let blogId = [[${data.id}]]
+
+    let data = {'comment': comment, 'blogId': blogId};
+    if (comment == '') {
+        alert('내용을 입력해 주세요.')
+        return;
+    } else {
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: "/comments",
+            contentType: "application/json", // JSON 형식으로 전달함을 알리기
+            data: JSON.stringify(data),
+            success: function () {
+                alert('댓글 작성 완료!');
+                window.location.reload();
+            }
+        })
+    }
+}
+
+function getComments() {
+    // 1. 기존 메모 내용을 지웁니다.
+    $('#comment_group').empty();
+    let user = [[${user}]]
+    let commentList = [[${commentList}]]
+    for (let i = 0; i < commentList.length; i++) {
+        let contents = commentList[i].contents;
+        let nickname = commentList[i].nickname;
+        let modifiedAt = commentList[i].modifiedAt; //시간은 나중에 추가하자....
+        let commentId = commentList[i].commentId;
+        let tempHtml = ``
+        if (user == nickname) {
+            tempHtml = `      
+         <!--        댓글 달기-->
+        <article class="media">
+            <div class="media-content">
+                <div class="field">
+                    <p class="control">
+                        <textarea id="comment" class="textarea" placeholder="Add a comment..."></textarea>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button" onclick="comment_save()">댓글 달기</button>
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!--        댓글 목록-->
+        <div id="commentList">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong id="username">${nickname}</strong>
+                            <br id="comment_text">
+                           ${contents}
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>`
+        }   $('#comment_group').append(tempHtml);
+    }
+}
