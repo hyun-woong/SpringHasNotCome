@@ -41,7 +41,6 @@
         function comment_save() {
             // let user = [[${user}]];
             // // 로그인 여부 검사시 필요
-
             let contents = $('#comment').val();
             let blogId = [[${data.id}]]
 
@@ -74,7 +73,7 @@
                 let modifiedAt = commentList[i].modifiedAt; //시간은 나중에 추가하자....
                 let commentId = commentList[i].commentId;
                 let tempHtml = ``
-                if (user == nickname) {
+                if (user === nickname) {
                     tempHtml = `
         <!--        댓글 목록-->
         <div id="commentList">
@@ -91,9 +90,11 @@
                 </div>
             </article>
         </div>`
-                }   $('#comment_group').append(tempHtml);
+                }
+                    $('#comment_group').append(tempHtml);
             }
         }
+
     </script>
 
 </head>

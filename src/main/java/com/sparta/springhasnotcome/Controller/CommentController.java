@@ -16,10 +16,16 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/comments")
-    public Comment createComment(@RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return commentService.createComment(requestDto, userDetails);
-    }
+//    @PostMapping("/comments")
+//    public Comment createComment(@RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        return commentService.createComment(requestDto, userDetails);
+//    }
+
+@PostMapping("/comments")
+public String createComment(@RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    commentService.createComment(requestDto, userDetails);
+    return "redirect:/";
+}
 
     @DeleteMapping("/comments/{id}")
     public Long deleteComment(@PathVariable Long id) {
