@@ -37,6 +37,7 @@ public class BlogController {
 //        );
 //    }
 
+    //상세페이지
     @GetMapping("/blogs/detail")
     public ModelAndView getOneBlogAndComments(@RequestParam Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return blogService.getOneBlogAndComments(id, userDetails);
