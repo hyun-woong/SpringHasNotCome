@@ -24,7 +24,7 @@ public class Blog extends Timestamped {
 
     @Column(nullable = false)
     private String contents;
-//
+
 //    @Column
 //    private Long userId;
 //
