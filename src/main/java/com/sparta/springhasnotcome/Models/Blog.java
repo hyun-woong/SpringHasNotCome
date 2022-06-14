@@ -25,21 +25,6 @@ public class Blog extends Timestamped {
     @Column(nullable = false)
     private String contents;
 
-//    @Column
-//    private Long userId;
-//
-//    @ManyToOne
-//    @JoinColumn(nullable=false)
-//    private User user;
-//
-//    public Blog(Long userId ,String username, String title, String contents){
-//        this.username = username;
-//        this.title = title;
-//        this.contents = contents;
-//        this.userId = userId;
-//    }
-
-
     public Blog(PostRequestDto requestDto){
         this.username = requestDto.getUsername();
         this.title = requestDto.getTitle();
