@@ -34,7 +34,6 @@ public class User {
     @Column(unique = true)
     private Long kakaoId;
 
-
     public User(String username, String password, String email, String passwordCheck) {
         this.username = username;
         this.password = password;
